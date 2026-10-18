@@ -44,7 +44,7 @@ disable_mode = 1
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1989226300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.038209975, -6.1280594)
-mass = 0.5
+mass = 0.3
 physics_material_override = SubResource("PhysicsMaterial_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1676356168]
