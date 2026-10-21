@@ -7,7 +7,11 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8760q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8760q"]
-size = Vector3(5, 1, 5)
+size = Vector3(20, 1, 14)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qopv1"]
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
 
 [node name="npc_talk" type="CharacterBody3D" unique_id=2146707237]
 script = ExtResource("1_qopv1")
@@ -21,25 +25,48 @@ mesh = SubResource("CapsuleMesh_8760q")
 [node name="Area3D" type="Area3D" parent="." unique_id=1345134086]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=960132850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
 shape = SubResource("BoxShape3D_8760q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1265250855]
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=2023506771]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 384.0
-offset_bottom = 193.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=1994448367]
-layout_mode = 0
-offset_right = 380.0
-offset_bottom = 193.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qopv1")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Panel" unique_id=336582381]
-layout_mode = 0
-offset_right = 379.0
-offset_bottom = 187.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1328525808]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2291672, 0)
+visible = false
+billboard = 1
+text = "E"
+font_size = 48
+outline_size = 8
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
