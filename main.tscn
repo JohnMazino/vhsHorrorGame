@@ -2,16 +2,17 @@
 
 [ext_resource type="Script" uid="uid://du8kdmqwiily0" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cmccp7u4ullqx" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://b0gtreufq77rs" path="res://npc_talk.tscn" id="3_h2yge"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
-size = Vector3(60, 2, 60)
+size = Vector3(64, 2, 60)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
 albedo_color = Color(0.11764706, 0.57254905, 0.15686275, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4c3ie"]
 material = SubResource("StandardMaterial3D_0xm2m")
-size = Vector3(60, 2, 60)
+size = Vector3(64, 2, 60)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
 friction = 0.8
@@ -29,22 +30,24 @@ script = ExtResource("1_0xm2m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.008)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="staticBody3D" unique_id=1993535323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -5.9604645e-08, 0)
 shape = SubResource("BoxShape3D_7dm0k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="staticBody3D" unique_id=332271323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 mesh = SubResource("BoxMesh_4c3ie")
 
 [node name="directionalLight3D" type="DirectionalLight3D" parent="." unique_id=135593104]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.590675, 2.3785214)
 shadow_enabled = true
 
-[node name="player" parent="." unique_id=213096598 instance=ExtResource("1_ig7tw")]
+[node name="player" parent="." unique_id=213096598 groups=["player"] instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1285818, 0.013271332)
 disable_mode = 1
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1989226300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.038209975, -6.1280594)
-mass = 0.3
+mass = 0.303
 physics_material_override = SubResource("PhysicsMaterial_0xm2m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1676356168]
@@ -57,3 +60,6 @@ shape = SubResource("SphereShape3D_4c3ie")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=966133224]
 transform = Transform3D(0.25881907, 0.0060226717, -0.96590704, -0.0060226717, 0.9999712, 0.0046212687, 0.96590704, 0.0046212687, 0.25884786, -8, 2.0124316, -1.9874909)
+
+[node name="npc_talk" parent="." unique_id=2146707237 instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1.9750209, 4.0123925)

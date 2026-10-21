@@ -34,16 +34,16 @@ func _physics_process(delta: float) -> void:
 	# дефолтный код для ходьбы
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	var currentSpeed = SPEED
+	var current_speed = SPEED
 	#Бег
 	if Input.is_action_pressed("sprint"):
-		currentSpeed = SPEED * 2
+		current_speed = SPEED * 2
 	if direction:
-		velocity.x = direction.x * currentSpeed
-		velocity.z = direction.z * currentSpeed
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, currentSpeed)
-		velocity.z = move_toward(velocity.z, 0, currentSpeed)
+		velocity.x = move_toward(velocity.x, 0, current_speed)
+		velocity.z = move_toward(velocity.z, 0, current_speed)
 		
 	move_and_slide()
 	

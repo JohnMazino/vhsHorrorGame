@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b0gtreufq77rs"]
+
+[ext_resource type="Script" uid="uid://bjhl5nqbkkiwq" path="res://npc_talk.gd" id="1_qopv1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4c3ie"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8760q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8760q"]
+size = Vector3(5, 1, 5)
+
+[node name="npc_talk" type="CharacterBody3D" unique_id=2146707237]
+script = ExtResource("1_qopv1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2054629201]
+shape = SubResource("CapsuleShape3D_4c3ie")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1729159267]
+mesh = SubResource("CapsuleMesh_8760q")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1345134086]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=960132850]
+shape = SubResource("BoxShape3D_8760q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1265250855]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=2023506771]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 384.0
+offset_bottom = 193.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=1994448367]
+layout_mode = 0
+offset_right = 380.0
+offset_bottom = 193.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Panel" unique_id=336582381]
+layout_mode = 0
+offset_right = 379.0
+offset_bottom = 187.0
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
