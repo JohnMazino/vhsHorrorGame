@@ -6,10 +6,13 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const CAMERA_SENS = 0.0012
+const regen_delay = 1.0
 
 var max_stamina = 100
 var stamina = 100
 var can_run = true
+var regen_points = 15.0
+var regen_timer = 0.0
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -33,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+		stamina -= 500 * delta
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	# дефолтный код для ходьбы
@@ -44,13 +47,17 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("sprint") and stamina > 0 and can_run:
 		current_speed = SPEED * 2
 		stamina -= 25 * delta
+		regen_timer = regen_delay
 		print(stamina)
 	elif !Input.is_action_pressed("sprint") and stamina < max_stamina:
-		stamina += 25 * delta
-		print(stamina)
+		if regen_timer > 0:
+			regen_timer -= delta
+		else:
+			stamina += regen_points * delta
+		#print(stamina)
 		if stamina >= max_stamina:
 			stamina = max_stamina
-		if stamina >= 20:
+		if stamina >= 0:
 			can_run = true
 		else:
 			can_run = false 
