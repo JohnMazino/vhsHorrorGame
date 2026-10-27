@@ -1,10 +1,15 @@
 extends CharacterBody3D
 
 @onready var camera_3d = $Camera3D
+@onready var progres_bar = $ProgressBar
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-const CAMERA_SENS = 0.0015 
+const CAMERA_SENS = 0.0012
+
+var max_stamina = 100
+var stamina = 100
+var can_run = true
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -36,8 +41,21 @@ func _physics_process(delta: float) -> void:
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var current_speed = SPEED
 	#Бег
-	if Input.is_action_pressed("sprint"):
+	if Input.is_action_pressed("sprint") and stamina > 0 and can_run:
 		current_speed = SPEED * 2
+		stamina -= 25 * delta
+		print(stamina)
+	elif !Input.is_action_pressed("sprint") and stamina < max_stamina:
+		stamina += 25 * delta
+		print(stamina)
+		if stamina >= max_stamina:
+			stamina = max_stamina
+		if stamina >= 20:
+			can_run = true
+		else:
+			can_run = false 
+	progres_bar.value = stamina
+	#print(current_speed)
 	if direction:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed

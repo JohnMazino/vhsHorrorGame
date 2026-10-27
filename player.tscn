@@ -18,3 +18,14 @@ fov = 60.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1523216731]
 mesh = SubResource("CapsuleMesh_i3pqv")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=2137143924]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 1075.0
+offset_right = -1369.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
