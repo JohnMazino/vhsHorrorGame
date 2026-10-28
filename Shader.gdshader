@@ -11,6 +11,7 @@ uniform float distortion_strength : hint_range(0.0, 1.0) = 0.1;
 uniform float ghost_strength : hint_range(0.0,0.3)=0.12;
 uniform float flicker_strength : hint_range(0.0, 0.1) = 0.005; 
 uniform float exhaustion : hint_range(0.0, 1.0) = 0.0; 
+
 float rand(vec2 co) {
     return fract(sin(dot(co, vec2(12.9898,78.233))) * 43758.5453);
 }
@@ -45,7 +46,7 @@ void fragment() {
     col = mix(col, blur_sample(uv), blur_strength);
 
     // При усталости картинка слегка темнеет и краснеет
-    col = mix(col, vec3(0.2, 0.0, 0.0), exhaustion * 0.4); 
+    col = mix(col, vec3(0.25, 0.02, 0.02), exhaustion * 0.22);
 
     float scanline = sin(uv.y * 800.0 + sin(TIME*5.0)*10.0) * 0.5 + 0.5;
     col *= 1.0 - scanline * scanline_strength;
@@ -56,10 +57,10 @@ void fragment() {
     col += noise;
 
     // Виньетка сильно сжимается, затемняя края (эффект туннельного зрения)
-    float current_vignette_strength = vignette_strength + (exhaustion * 1.5);
+    float current_vignette_strength = vignette_strength + (exhaustion * 0.7);
     float dist = distance(uv, vec2(0.5));
     // При усталости виньетка начинает "наползать" на центр экрана
-    float vignette = smoothstep(0.6 - exhaustion * 0.3, 0.9, dist);
+    float vignette = smoothstep(0.35 - exhaustion * 0.25, 1.05, dist);
     col *= mix(1.0, 1.0 - vignette, clamp(current_vignette_strength, 0.0, 1.0));
 
     // Экран сильнее мерцает
@@ -67,4 +68,5 @@ void fragment() {
     col *= current_flicker;
 
     COLOR = vec4(col, 1.0);
+
 }

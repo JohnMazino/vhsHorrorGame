@@ -43,7 +43,7 @@ light_color = Color(0.8117647, 0.5176471, 0.2784314, 1)
 shadow_enabled = true
 
 [node name="player" parent="." unique_id=213096598 groups=["player"] instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06324959, 1.5614145, 0.32703018)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06324959, 2.0805895, 0.33026695)
 disable_mode = 1
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1989226300]
@@ -63,4 +63,4 @@ shape = SubResource("SphereShape3D_4c3ie")
 transform = Transform3D(0.25881907, 0.0060226717, -0.96590704, -0.0060226717, 0.9999712, 0.0046212687, 0.96590704, 0.0046212687, 0.25884786, -8, 2.0124316, -1.9874909)
 
 [node name="npc_talk" parent="." unique_id=2146707237 instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1.9750209, 4.0123925)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1.9750209, 4.0123916)

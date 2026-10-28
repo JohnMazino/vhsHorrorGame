@@ -1,21 +1,41 @@
 extends CharacterBody3D
+
 @onready var camera_3d = $Camera3D
 @onready var progres_bar = $TextureProgressBar
 @onready var vhs_effect = $Camera3D/CanvasLayer/ColorRect
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const CAMERA_SENS = 0.0012
 const regen_delay = 1.0
 
+# стамина
 var max_stamina = 100
 var stamina = 100
 var regen_points = 15.0
 var regen_timer = 0.0
-var current_exhaustion = 0.0  # Для плавного перехода эффекта
+# шейдеры
+var current_exhaustion = 0.0  # Для плавного переход эффекта затемнения
+# здоровье
+var max_hp = 100.0
+var hp = 100.0
+var is_dead = false
+
+
+func take_damage(amount: float) -> void:
+	if is_dead:
+		return
+		
+	hp = max(hp - amount, 0.0)
+	print("HP: ", hp)
+	
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		take_damage(15.0)
+	
 	if event.is_action_pressed("quit"): get_tree().quit()
 	
 	if event is InputEventMouseMotion:
@@ -46,31 +66,36 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("sprint") and stamina > 0:
 		current_speed = SPEED * 2
 		if Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_back") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-			stamina -= 10 * delta
+			stamina -= 20 * delta
 			regen_timer = 0.0
 	else:
 		regen_timer += delta
 		if regen_timer >= regen_delay:
 			stamina = min(stamina + regen_points * delta ,max_stamina)
+	#print(stamina)
 	progres_bar.value = stamina
 	
 	#Усиление эффекта шейдеров при усталости
 	# --- Расчет целевого эффекта усталости ---
 	var target_exhaustion = 0.0
+
+	# Начинаем с 75 стамины (можно поставить 80 или 70)
+	if stamina < 75.0:
+		# От 75 → 0  эффект идёт от 0 → 1
+		target_exhaustion = 1.0 - (stamina / 75.0)
 	
-	if stamina <= 0.1:
+	# Когда очень мало стамины — принудительно максимальный эффект
+	if stamina <= 15.0:
 		target_exhaustion = 1.0
-	elif stamina < max_stamina * 0.5:
-		target_exhaustion = 1.0 - (stamina / (max_stamina * 0.5))
-		
-	if Input.is_action_pressed("sprint") and stamina < max_stamina * 0.5:
-		target_exhaustion = max(target_exhaustion, 0.8)
-		
+
+	# При спринте ниже 60% усиливаем
+	if Input.is_action_pressed("sprint") and stamina < 60.0:
+		target_exhaustion = max(target_exhaustion, 0.75)
+	
 	# --- Плавное сглаживание ---
-	# 3.0 — это скорость сглаживания. 
+	# 1.2 — это скорость сглаживания. 
 	# Чем больше число, тем быстрее эффект появляется/исчезает. 
-	# Попробуй значения от 1.5 до 5.0, чтобы подобрать идеал.
-	current_exhaustion = lerp(current_exhaustion, target_exhaustion, 1.5 * delta)
+	current_exhaustion = lerp(current_exhaustion, target_exhaustion, 1.2 * delta)
 	
 	# Передаем сглаженное значение в шейдер
 	vhs_effect.material.set_shader_parameter("exhaustion", clamp(current_exhaustion, 0.0, 1.0))
