@@ -1,6 +1,20 @@
 [gd_scene format=3 uid="uid://cmccp7u4ullqx"]
 
 [ext_resource type="Script" uid="uid://ba2mqdlffwaeo" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Shader" uid="uid://6p87qiaufltp" path="res://Shader.gdshader" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://b3pjc32u8tifh" path="res://images/stamina/stamin_under.png" id="2_onrkg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s1fef"]
+shader = ExtResource("2_i3pqv")
+shader_parameter/aberration_strength = 3.0
+shader_parameter/blur_strength = 2.0
+shader_parameter/noise_strength = 0.048
+shader_parameter/vignette_strength = 0.78
+shader_parameter/scanline_strength = 0.016
+shader_parameter/distortion_strength = 0.1
+shader_parameter/ghost_strength = 0.12
+shader_parameter/flicker_strength = 0.005
+shader_parameter/exhaustion = 0.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4c3ie"]
 
@@ -9,23 +23,33 @@
 [node name="player" type="CharacterBody3D" unique_id=213096598]
 script = ExtResource("1_onrkg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1720800377]
-shape = SubResource("CapsuleShape3D_4c3ie")
-
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1492183510]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55472696, -0.24360657)
 fov = 60.0
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D" unique_id=1502539067]
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer" unique_id=244274851]
+material = SubResource("ShaderMaterial_s1fef")
+anchors_preset = -1
+anchor_right = 0.9990001
+anchor_bottom = 1.0
+offset_right = -0.080078125
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1720800377]
+shape = SubResource("CapsuleShape3D_4c3ie")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1523216731]
 mesh = SubResource("CapsuleMesh_i3pqv")
 
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=2137143924]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 1083.0
-offset_right = -1369.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1967064459]
+anchors_preset = -1
+anchor_left = 0.34
+anchor_top = 0.86700004
+anchor_right = 0.652
+anchor_bottom = 0.91700006
+offset_left = -0.7999878
+offset_top = -0.4000244
+offset_right = 0.16003418
+offset_bottom = -0.4000244
+texture_under = ExtResource("2_onrkg")

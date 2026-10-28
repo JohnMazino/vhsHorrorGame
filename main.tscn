@@ -43,7 +43,7 @@ light_color = Color(0.8117647, 0.5176471, 0.2784314, 1)
 shadow_enabled = true
 
 [node name="player" parent="." unique_id=213096598 groups=["player"] instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1285818, 0.013271332)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06324959, 1.5614145, 0.32703018)
 disable_mode = 1
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1989226300]
