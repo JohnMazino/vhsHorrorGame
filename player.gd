@@ -10,7 +10,6 @@ const regen_delay = 1.0
 
 var max_stamina = 100
 var stamina = 100
-var can_run = true
 var regen_points = 15.0
 var regen_timer = 0.0
 
@@ -43,26 +42,19 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var current_speed = SPEED
-	#Бег
-	if Input.is_action_pressed("sprint") and stamina > 0 and can_run:
+	
+	# бег
+	if Input.is_action_pressed("sprint") and stamina > 0:
 		current_speed = SPEED * 2
-		stamina -= 25 * delta
-		regen_timer = regen_delay
-		print(stamina)
-	elif !Input.is_action_pressed("sprint") and stamina < max_stamina:
-		if regen_timer > 0:
-			regen_timer -= delta
-		else:
-			stamina += regen_points * delta
-		#print(stamina)
-		if stamina >= max_stamina:
-			stamina = max_stamina
-		if stamina >= 0:
-			can_run = true
-		else:
-			can_run = false 
+		if Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_back") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+			stamina -= 25 * delta
+			regen_timer = 0.0
+	else:
+		regen_timer += delta
+		if regen_timer >= regen_delay:
+			stamina = min(stamina + regen_points * delta ,max_stamina)
 	progres_bar.value = stamina
-	#print(current_speed)
+	
 	if direction:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
