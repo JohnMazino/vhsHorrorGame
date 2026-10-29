@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ba2mqdlffwaeo" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Shader" uid="uid://6p87qiaufltp" path="res://Shader.gdshader" id="2_i3pqv"]
-[ext_resource type="Texture2D" uid="uid://b3pjc32u8tifh" path="res://images/stamina/stamin_under.png" id="2_onrkg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s1fef"]
 shader = ExtResource("2_i3pqv")
@@ -52,4 +51,3 @@ offset_left = -0.7999878
 offset_top = -0.4000244
 offset_right = 0.16003418
 offset_bottom = -0.4000244
-texture_under = ExtResource("2_onrkg")
