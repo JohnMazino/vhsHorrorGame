@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ba2mqdlffwaeo" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Shader" uid="uid://6p87qiaufltp" path="res://Shader.gdshader" id="2_i3pqv"]
+[ext_resource type="Script" uid="uid://blxct5tyfpqwq" path="res://settings.gd" id="3_hqtel"]
+[ext_resource type="FontFile" uid="uid://b73kakyc57n0c" path="res://CorrectionBrush.ttf" id="3_i3pqv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s1fef"]
 shader = ExtResource("2_i3pqv")
@@ -51,3 +53,64 @@ offset_left = -0.7999878
 offset_top = -0.4000244
 offset_right = 0.16003418
 offset_bottom = -0.4000244
+
+[node name="pauseMenu" type="CanvasLayer" parent="." unique_id=1390717543]
+process_mode = 3
+layer = 2
+visible = false
+script = ExtResource("3_hqtel")
+
+[node name="pauseMenu" type="Control" parent="pauseMenu" unique_id=373895164]
+layout_mode = 3
+anchor_right = 0.9990001
+anchor_bottom = 1.0
+offset_right = -1878.0801
+offset_bottom = -1160.0
+
+[node name="settingsButton" type="Button" parent="pauseMenu/pauseMenu" unique_id=1786437484]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 47.95
+anchor_bottom = 30.000002
+offset_top = 560.0
+offset_right = -1636.0
+offset_bottom = -532.0001
+theme_override_fonts/font = ExtResource("3_i3pqv")
+theme_override_font_sizes/font_size = 40
+text = "НАСТРОЙКИ"
+
+[node name="settings" type="Control" parent="pauseMenu" unique_id=1713718555]
+visible = false
+layout_mode = 3
+anchor_right = 1.0250001
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -1928.0002
+offset_bottom = -1160.0
+
+[node name="display" type="OptionButton" parent="pauseMenu/settings" unique_id=992097369]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1257.0
+offset_top = 194.0
+offset_right = -316.98413
+offset_bottom = -937.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="pauseMenu/settings" unique_id=382738509]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 807.0
+offset_top = 194.0
+offset_right = -650.98413
+offset_bottom = -921.0
+theme_override_fonts/normal_font = ExtResource("3_i3pqv")
+theme_override_font_sizes/normal_font_size = 45
+text = "Разрешение экрана"
+
+[connection signal="pressed" from="pauseMenu/pauseMenu/settingsButton" to="pauseMenu" method="_on_settings_button_pressed"]
+[connection signal="item_selected" from="pauseMenu/settings/display" to="pauseMenu" method="_on_display_item_selected"]

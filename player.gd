@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var camera_3d = $Camera3D
 @onready var progres_bar = $TextureProgressBar
 @onready var vhs_effect = $Camera3D/CanvasLayer/ColorRect
+@onready var pause_menu = $pauseMenu
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -36,7 +37,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		take_damage(15.0)
 	
-	if event.is_action_pressed("quit"): get_tree().quit()
+	#if event.is_action_pressed("quit"): get_tree().quit()
 	
 	if event is InputEventMouseMotion:
 		# Поворот тела (влево-вправо)
@@ -51,7 +52,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
+	# прыжок
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		stamina -= 500 * delta
