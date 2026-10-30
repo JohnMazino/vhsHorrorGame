@@ -21,6 +21,8 @@ shader_parameter/exhaustion = 0.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_i3pqv"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_hqtel"]
+
 [node name="player" type="CharacterBody3D" unique_id=213096598]
 script = ExtResource("1_onrkg")
 
@@ -31,6 +33,24 @@ fov = 60.0
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3D" unique_id=1502539067]
 
 [node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer" unique_id=244274851]
+material = SubResource("ShaderMaterial_s1fef")
+anchors_preset = -1
+anchor_right = 0.9990001
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 7.919922
+offset_bottom = 8.0
+
+[node name="ColorRect2" type="ColorRect" parent="Camera3D/CanvasLayer" unique_id=1490294410]
+material = SubResource("ShaderMaterial_s1fef")
+anchors_preset = -1
+anchor_right = 0.9990001
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = 7.919922
+
+[node name="ColorRect3" type="ColorRect" parent="Camera3D/CanvasLayer" unique_id=1106784277]
 material = SubResource("ShaderMaterial_s1fef")
 anchors_preset = -1
 anchor_right = 0.9990001
@@ -98,8 +118,9 @@ offset_left = 1257.0
 offset_top = 194.0
 offset_right = -316.98413
 offset_bottom = -937.0
+tooltip_text = "Меняет разрешение, но не графика и масштибирование"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="pauseMenu/settings" unique_id=382738509]
+[node name="Resolution" type="RichTextLabel" parent="pauseMenu/settings" unique_id=382738509]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 59.687004
@@ -112,5 +133,143 @@ theme_override_fonts/normal_font = ExtResource("3_i3pqv")
 theme_override_font_sizes/normal_font_size = 45
 text = "Разрешение экрана"
 
+[node name="Scale" type="RichTextLabel" parent="pauseMenu/settings" unique_id=860411828]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 807.0
+offset_top = 362.0
+offset_right = -650.98413
+offset_bottom = -753.0
+theme_override_fonts/normal_font = ExtResource("3_i3pqv")
+theme_override_font_sizes/normal_font_size = 45
+text = "МАСШТАБИРОВАНИЕ"
+
+[node name="Scale2" type="RichTextLabel" parent="pauseMenu/settings" unique_id=1374462313]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1382.0
+offset_top = 439.0
+offset_right = -479.98413
+offset_bottom = -735.0
+theme_override_fonts/normal_font = ExtResource("3_i3pqv")
+theme_override_font_sizes/normal_font_size = 15
+text = "FSR 1.0
+"
+
+[node name="question" type="RichTextLabel" parent="pauseMenu/settings" unique_id=1384484323]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1615.0
+offset_top = 194.0
+offset_right = -236.98413
+offset_bottom = -944.0
+tooltip_text = "меняет разрешение, но не масштабирование картинки"
+theme_override_fonts/normal_font = ExtResource("3_i3pqv")
+theme_override_font_sizes/normal_font_size = 45
+text = "?"
+
+[node name="scaleText" type="RichTextLabel" parent="pauseMenu/settings" unique_id=654581381]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1615.0
+offset_top = 362.0
+offset_right = -117.98413
+offset_bottom = -753.0
+tooltip_text = "меняет разрешение, но не масштабирование картинки"
+theme_override_fonts/normal_font = ExtResource("3_i3pqv")
+theme_override_font_sizes/normal_font_size = 45
+
+[node name="HSlider" type="HSlider" parent="pauseMenu/settings" unique_id=1612393527]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1259.0
+offset_top = 362.0
+offset_right = -316.98413
+offset_bottom = -771.0
+min_value = 0.125
+max_value = 3.0
+step = 0.125
+value = 1.0
+
+[node name="oneFsrBox" type="CheckBox" parent="pauseMenu/settings" unique_id=295110023]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.25
+anchor_top = -0.25
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1365.0
+offset_top = 444.0
+offset_right = -527.98413
+offset_bottom = -732.0
+button_group = SubResource("ButtonGroup_hqtel")
+
+[node name="Scale4" type="RichTextLabel" parent="pauseMenu/settings" unique_id=136342386]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1284.0
+offset_top = 439.0
+offset_right = -577.98413
+offset_bottom = -735.0
+theme_override_fonts/normal_font = ExtResource("3_i3pqv")
+theme_override_font_sizes/normal_font_size = 15
+text = "NATIVE"
+
+[node name="nativeBox" type="CheckBox" parent="pauseMenu/settings" unique_id=257782597]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.25
+anchor_top = -0.25
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1267.0
+offset_top = 444.0
+offset_right = -625.98413
+offset_bottom = -732.0
+button_pressed = true
+button_group = SubResource("ButtonGroup_hqtel")
+
+[node name="Scale3" type="RichTextLabel" parent="pauseMenu/settings" unique_id=1192004368]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1480.0
+offset_top = 439.0
+offset_right = -381.98413
+offset_bottom = -735.0
+theme_override_fonts/normal_font = ExtResource("3_i3pqv")
+theme_override_font_sizes/normal_font_size = 15
+text = "FSR 2.2"
+
+[node name="twoFsrBox" type="CheckBox" parent="pauseMenu/settings" unique_id=1555449293]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.25
+anchor_top = -0.25
+anchor_right = 59.687004
+anchor_bottom = 37.25
+offset_left = 1463.0
+offset_top = 444.0
+offset_right = -429.98413
+offset_bottom = -732.0
+button_group = SubResource("ButtonGroup_hqtel")
+
 [connection signal="pressed" from="pauseMenu/pauseMenu/settingsButton" to="pauseMenu" method="_on_settings_button_pressed"]
 [connection signal="item_selected" from="pauseMenu/settings/display" to="pauseMenu" method="_on_display_item_selected"]
+[connection signal="value_changed" from="pauseMenu/settings/HSlider" to="pauseMenu" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="pauseMenu/settings/oneFsrBox" to="pauseMenu" method="_on_one_fsr_box_pressed"]
+[connection signal="pressed" from="pauseMenu/settings/nativeBox" to="pauseMenu" method="_on_native_box_pressed"]
+[connection signal="pressed" from="pauseMenu/settings/twoFsrBox" to="pauseMenu" method="_on_two_fsr_box_pressed"]

@@ -13,8 +13,11 @@ var display_option = [
 	Vector2i(3840, 2160)
 ]
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_viewport()
+	$settings/scaleText.text = str($settings/HSlider.value)
 	
 	for i in display_option:
 		display.add_item(str(i.x) + "x" + str(i.y))
@@ -34,11 +37,13 @@ func _process(delta: float) -> void:
 			get_tree().paused = true
 			visible = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
+		elif get_tree().paused == true && settings_button.visible == true:
 			get_tree().paused = false
 			visible = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+		elif get_tree().paused == true && settings_button.visible == false:
+			settings_button.visible = true
+			settings.visible = false
 
 func _on_settings_button_pressed() -> void:
 	settings_button.visible = false
@@ -52,3 +57,28 @@ func _on_display_item_selected(index: int) -> void:
 	#	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 	DisplayServer.window_set_size(new_display)
+
+
+func _on_h_slider_value_changed(value: float) -> void:
+	get_viewport().scaling_3d_scale = value
+	$settings/scaleText.text = str(get_viewport().scaling_3d_scale)
+
+
+func _on_one_fsr_box_pressed() -> void:
+	get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
+	get_viewport().scaling_3d_scale = 0.75
+	$settings/scaleText.text = str(get_viewport().scaling_3d_scale)
+	$settings/HSlider.value = get_viewport().scaling_3d_scale
+	
+
+func _on_two_fsr_box_pressed() -> void:
+	get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR2
+	get_viewport().scaling_3d_scale = 0.75
+	$settings/scaleText.text = str(get_viewport().scaling_3d_scale)
+	$settings/HSlider.value = get_viewport().scaling_3d_scale
+
+func _on_native_box_pressed() -> void:
+	get_viewport().scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+	get_viewport().scaling_3d_scale = 1.0
+	$settings/scaleText.text = str(get_viewport().scaling_3d_scale)
+	$settings/HSlider.value = get_viewport().scaling_3d_scale
